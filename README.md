@@ -1,1 +1,1 @@
-# npb_go
+# npb-go
