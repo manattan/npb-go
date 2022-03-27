@@ -17,6 +17,7 @@ func NewServer(teamUC *usecase.TeamUseCase) *echo.Echo {
 
 	v0 := e.Group("/api/v0")
 
+	v0.GET("/team/", teamHandler.GetTeams)
 	v0.GET("/team/:id", teamHandler.GetTeam)
 
 	return e

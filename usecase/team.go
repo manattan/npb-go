@@ -22,3 +22,13 @@ func (u *TeamUseCase) GetTeam(teamId string) (*entity.Team, error) {
 
 	return team, nil
 }
+
+func (u *TeamUseCase) GetTeams() ([]*entity.Team, error) {
+	teams, err := u.TeamRepo.FindAll()
+
+	if err != nil {
+		return nil, err
+	}
+
+	return teams, err
+}

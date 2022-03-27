@@ -15,6 +15,18 @@ func NewTeamHandler(teamUC *usecase.TeamUseCase) *TeamHandler {
 	return &TeamHandler{teamUC: teamUC}
 }
 
+func (h *TeamHandler) GetTeams(c echo.Context) error {
+	teams, err := h.teamUC.GetTeams()
+
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, &getTeamError{
+			Message: "hoge error",
+		})
+	}
+
+	return c.JSON(http.StatusOK, &teams)
+}
+
 func (h *TeamHandler) GetTeam(c echo.Context) error {
 
 	teamId := c.Param("id")
