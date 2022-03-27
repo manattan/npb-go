@@ -13,7 +13,7 @@ func NewTeamUseCase(TeamRepo repository.Team) *TeamUseCase {
 	return &TeamUseCase{TeamRepo: TeamRepo}
 }
 
-func (u *TeamUseCase) GetTeam(teamId string) ( *entity.Team, error ) {
+func (u *TeamUseCase) GetTeam(teamId string) (*entity.Team, error) {
 	team, err := u.TeamRepo.FindByID(teamId)
 
 	if err != nil {

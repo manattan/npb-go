@@ -18,7 +18,7 @@ func main() {
 
 	teamRepo := database.NewTeamRepository(db)
 
-    userUC := usecase.NewTeamUseCase(teamRepo)
+	userUC := usecase.NewTeamUseCase(teamRepo)
 
 	s := web.NewServer(userUC)
 

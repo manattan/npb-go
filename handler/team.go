@@ -11,7 +11,7 @@ type TeamHandler struct {
 	teamUC *usecase.TeamUseCase
 }
 
-func NewTeamHandler (teamUC *usecase.TeamUseCase) *TeamHandler {
+func NewTeamHandler(teamUC *usecase.TeamUseCase) *TeamHandler {
 	return &TeamHandler{teamUC: teamUC}
 }
 
@@ -26,11 +26,11 @@ func (h *TeamHandler) GetTeam(c echo.Context) error {
 			Message: err.Error(),
 		})
 	}
-	
+
 	return c.JSON(http.StatusOK, &getTeamRes{
-		ID: team.ID,
-		Name: team.Name,
-		Initial: team.Initial,
+		ID:       team.ID,
+		Name:     team.Name,
+		Initial:  team.Initial,
 		LeagueId: team.LeagueId,
 	})
 
@@ -41,8 +41,8 @@ type getTeamError struct {
 }
 
 type getTeamRes struct {
-	ID string `json:"id"`
-	Name string `json:"name"`
-	Initial string `json:"initial"`
-	LeagueId int `json:"leagueId"`
+	ID       string `json:"id"`
+	Name     string `json:"name"`
+	Initial  string `json:"initial"`
+	LeagueId int    `json:"leagueId"`
 }

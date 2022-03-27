@@ -15,17 +15,17 @@ type TeamRepository struct {
 }
 
 type Team struct {
-	ID      string `json:"id"`
-	Name    string `json:"name"`
-	Initial string `json:"initial"`
-	LeagueId int `json:"leagueId"`
+	ID       string `json:"id"`
+	Name     string `json:"name"`
+	Initial  string `json:"initial"`
+	LeagueId int    `json:"leagueId"`
 }
 
-func NewTeamRepository (DB *gorm.DB) *TeamRepository {
+func NewTeamRepository(DB *gorm.DB) *TeamRepository {
 	return &TeamRepository{DB: DB}
 }
 
-func (r *TeamRepository) FindByID (id string) (*entity.Team, error) {
+func (r *TeamRepository) FindByID(id string) (*entity.Team, error) {
 	var team Team
 	r.DB.Table("teams").First(&team, id)
 	fmt.Println(team)
@@ -35,9 +35,9 @@ func (r *TeamRepository) FindByID (id string) (*entity.Team, error) {
 	}
 
 	return &entity.Team{
-		ID: team.ID,
-		Name: team.Name,
-		Initial: team.Initial,
+		ID:       team.ID,
+		Name:     team.Name,
+		Initial:  team.Initial,
 		LeagueId: team.LeagueId,
 	}, nil
 }
