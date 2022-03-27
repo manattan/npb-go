@@ -17,14 +17,23 @@ func NewTeamHandler(teamUC *usecase.TeamUseCase) *TeamHandler {
 
 func (h *TeamHandler) GetTeams(c echo.Context) error {
 	teams, err := h.teamUC.GetTeams()
-
 	if err != nil {
-		return c.JSON(http.StatusBadRequest, &getTeamError{
-			Message: "hoge error",
+		return c.JSON(http.StatusInternalServerError, &GetTeamError{
+			Message: err.Error(),
 		})
 	}
 
-	return c.JSON(http.StatusOK, &teams)
+	var res []*GetTeamResponse
+	for _, team := range teams {
+		res = append(res, &GetTeamResponse{
+			ID:       team.ID,
+			Name:     team.Name,
+			Initial:  team.Initial,
+			LeagueId: team.LeagueId,
+		})
+	}
+
+	return c.JSON(http.StatusOK, res)
 }
 
 func (h *TeamHandler) GetTeam(c echo.Context) error {
@@ -34,12 +43,12 @@ func (h *TeamHandler) GetTeam(c echo.Context) error {
 	team, err := h.teamUC.GetTeam(teamId)
 
 	if err != nil {
-		return c.JSON(http.StatusNotFound, &getTeamError{
+		return c.JSON(http.StatusNotFound, &GetTeamError{
 			Message: err.Error(),
 		})
 	}
 
-	return c.JSON(http.StatusOK, &getTeamRes{
+	return c.JSON(http.StatusOK, &GetTeamResponse{
 		ID:       team.ID,
 		Name:     team.Name,
 		Initial:  team.Initial,
@@ -48,11 +57,11 @@ func (h *TeamHandler) GetTeam(c echo.Context) error {
 
 }
 
-type getTeamError struct {
+type GetTeamError struct {
 	Message string `json:"message"`
 }
 
-type getTeamRes struct {
+type GetTeamResponse struct {
 	ID       string `json:"id"`
 	Name     string `json:"name"`
 	Initial  string `json:"initial"`
