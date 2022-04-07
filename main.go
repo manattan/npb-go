@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/manattan/npb_api/database"
-	"github.com/manattan/npb_api/usecase"
-	"github.com/manattan/npb_api/web"
+	"github.com/manattan/npb_go/database"
+	"github.com/manattan/npb_go/usecase"
+	"github.com/manattan/npb_go/web"
 )
 
 func main() {

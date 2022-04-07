@@ -3,8 +3,8 @@ package database
 import (
 	"fmt"
 
-	"github.com/manattan/npb_api/entity"
-	"github.com/manattan/npb_api/repository"
+	"github.com/manattan/npb_go/entity"
+	"github.com/manattan/npb_go/repository"
 	"gorm.io/gorm"
 )
 

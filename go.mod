@@ -1,4 +1,4 @@
-module github.com/manattan/npb_api
+module github.com/manattan/npb_go
 
 go 1.17
 

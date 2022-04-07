@@ -3,8 +3,8 @@ package web
 import (
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
-	"github.com/manattan/npb_api/handler"
-	"github.com/manattan/npb_api/usecase"
+	"github.com/manattan/npb_go/handler"
+	"github.com/manattan/npb_go/usecase"
 )
 
 func NewServer(teamUC *usecase.TeamUseCase) *echo.Echo {

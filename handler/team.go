@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/labstack/echo/v4"
-	"github.com/manattan/npb_api/usecase"
+	"github.com/manattan/npb_go/usecase"
 )
 
 type TeamHandler struct {
