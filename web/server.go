@@ -23,7 +23,7 @@ func NewServer(teamUC *usecase.TeamUseCase, playerUC *usecase.PlayerUseCase) *ec
 	v0.GET("/team/:id", teamHandler.GetTeam)
 
 	// search player
-	v0.GET("/player", playerHandler.GetPlayer)
+	v0.GET("/player", playerHandler.GetPlayers)
 
 	return e
 }

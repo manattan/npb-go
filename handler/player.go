@@ -15,8 +15,8 @@ func NewPlayerHandler(PlayerUC *usecase.PlayerUseCase) *PlayerHandler {
 	return &PlayerHandler{PlayerUC: PlayerUC}
 }
 
-func (h *PlayerHandler) GetPlayer(c echo.Context) error {
-	players, err := h.PlayerUC.GetPlayer()
+func (h *PlayerHandler) GetPlayers(c echo.Context) error {
+	players, err := h.PlayerUC.GetPlayers()
 
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, &GetTeamError{
@@ -24,9 +24,9 @@ func (h *PlayerHandler) GetPlayer(c echo.Context) error {
 		})
 	}
 
-	var res []*GetPlayerSuccess
+	var res []*GetPlayersSuccess
 	for _, player := range players {
-		res = append(res, &GetPlayerSuccess{
+		res = append(res, &GetPlayersSuccess{
 			ID:            player.ID,
 			Name:          player.Name,
 			Year:          player.Year,
@@ -39,7 +39,7 @@ func (h *PlayerHandler) GetPlayer(c echo.Context) error {
 	return c.JSON(http.StatusOK, res)
 }
 
-type GetPlayerSuccess struct {
+type GetPlayersSuccess struct {
 	ID            string `json:"id"`
 	Year          int    `json:"year"`
 	Name          string `json:"name"`

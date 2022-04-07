@@ -13,7 +13,7 @@ func NewPlayerUseCase(PlayerRepo repository.Player) *PlayerUseCase {
 	return &PlayerUseCase{PlayerRepo: PlayerRepo}
 }
 
-func (u *PlayerUseCase) GetPlayer() ([]*entity.Player, error) {
+func (u *PlayerUseCase) GetPlayers() ([]*entity.Player, error) {
 	players, err := u.PlayerRepo.FindAll()
 
 	if err != nil {
