@@ -7,18 +7,23 @@ import (
 	"github.com/manattan/npb_go/usecase"
 )
 
-func NewServer(teamUC *usecase.TeamUseCase) *echo.Echo {
+func NewServer(teamUC *usecase.TeamUseCase, playerUC *usecase.PlayerUseCase) *echo.Echo {
 	e := echo.New()
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 	e.Use(middleware.CORS())
 
 	teamHandler := handler.NewTeamHandler(teamUC)
+	playerHandler := handler.NewPlayerHandler(playerUC)
 
 	v0 := e.Group("/api/v0")
 
-	v0.GET("/team/", teamHandler.GetTeams)
+	// search team
+	v0.GET("/team", teamHandler.GetTeams)
 	v0.GET("/team/:id", teamHandler.GetTeam)
+
+	// search player
+	v0.GET("/player", playerHandler.GetPlayer)
 
 	return e
 }
