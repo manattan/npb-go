@@ -39,6 +39,10 @@ func (h *PlayerHandler) GetPlayers(c echo.Context) error {
 	return c.JSON(http.StatusOK, res)
 }
 
+type GetPlayersError struct {
+	Message string `json:"message"`
+}
+
 type GetPlayersSuccess struct {
 	ID            string `json:"id"`
 	Year          int    `json:"year"`

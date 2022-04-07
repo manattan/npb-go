@@ -23,9 +23,9 @@ func (h *TeamHandler) GetTeams(c echo.Context) error {
 		})
 	}
 
-	var res []*GetTeamResponse
+	var res []*GetTeamSuccess
 	for _, team := range teams {
-		res = append(res, &GetTeamResponse{
+		res = append(res, &GetTeamSuccess{
 			ID:       team.ID,
 			Name:     team.Name,
 			Initial:  team.Initial,
@@ -48,7 +48,7 @@ func (h *TeamHandler) GetTeam(c echo.Context) error {
 		})
 	}
 
-	return c.JSON(http.StatusOK, &GetTeamResponse{
+	return c.JSON(http.StatusOK, &GetTeamSuccess{
 		ID:       team.ID,
 		Name:     team.Name,
 		Initial:  team.Initial,
@@ -61,7 +61,7 @@ type GetTeamError struct {
 	Message string `json:"message"`
 }
 
-type GetTeamResponse struct {
+type GetTeamSuccess struct {
 	ID       string `json:"id"`
 	Name     string `json:"name"`
 	Initial  string `json:"initial"`
