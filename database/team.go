@@ -54,7 +54,6 @@ func (r *TeamRepository) FindAll() ([]*entity.Team, error) {
 
 	var res []*entity.Team
 	for _, team := range teams {
-		fmt.Println(team)
 		res = append(res, &entity.Team{
 			ID:       team.ID,
 			Name:     team.Name,

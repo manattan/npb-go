@@ -13,12 +13,18 @@ func NewPlayerUseCase(PlayerRepo repository.Player) *PlayerUseCase {
 	return &PlayerUseCase{PlayerRepo: PlayerRepo}
 }
 
-func (u *PlayerUseCase) GetPlayers() ([]*entity.Player, error) {
-	players, err := u.PlayerRepo.FindAll()
+func (u *PlayerUseCase) GetPlayers(params repository.GetPlayersSearchParams) ([]*entity.Player, error) {
+	players, err := u.PlayerRepo.FindWithParams(params)
 
 	if err != nil {
 		return nil, err
 	}
 
 	return players, err
+}
+
+type GetPlayersSearchParams struct {
+	TeamID        int
+	Year          int
+	UniformNumber int
 }

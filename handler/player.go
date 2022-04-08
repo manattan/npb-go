@@ -2,8 +2,10 @@ package handler
 
 import (
 	"net/http"
+	"strconv"
 
 	"github.com/labstack/echo/v4"
+	"github.com/manattan/npb_go/repository"
 	"github.com/manattan/npb_go/usecase"
 )
 
@@ -16,7 +18,18 @@ func NewPlayerHandler(PlayerUC *usecase.PlayerUseCase) *PlayerHandler {
 }
 
 func (h *PlayerHandler) GetPlayers(c echo.Context) error {
-	players, err := h.PlayerUC.GetPlayers()
+	var teamId int
+	var year int
+	var uniformNumber int
+	teamId, _ = strconv.Atoi(c.QueryParam("teamId"))
+	year, _ = strconv.Atoi(c.QueryParam("year"))
+	uniformNumber, _ = strconv.Atoi(c.QueryParam("uniformNumber"))
+
+	players, err := h.PlayerUC.GetPlayers(repository.GetPlayersSearchParams{
+		TeamID:        teamId,
+		Year:          year,
+		UniformNumber: uniformNumber,
+	})
 
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, &GetTeamError{
@@ -50,4 +63,10 @@ type GetPlayersSuccess struct {
 	TeamID        int    `json:"teamId"`
 	PositionID    int    `json:"positionId"`
 	UniformNumber int    `json:"uniformNumber"`
+}
+
+type GetPlayersSearchParams struct {
+	TeamID        int
+	Year          int
+	UniformNumber int
 }

@@ -27,10 +27,10 @@ func NewPlayerRepository(DB *gorm.DB) *PlayerRepository {
 	return &PlayerRepository{DB: DB}
 }
 
-func (r *PlayerRepository) FindAll() ([]*entity.Player, error) {
+func (r *PlayerRepository) FindWithParams(params repository.GetPlayersSearchParams) ([]*entity.Player, error) {
 	var players []Player
 
-	r.DB.Table("players").Find(&players)
+	r.DB.Table("players").Where(&Player{Year: params.Year, TeamID: params.TeamID, UniformNumber: params.UniformNumber}).Find(&players)
 
 	if len(players) == 0 {
 		return nil, fmt.Errorf("player is not registered")
@@ -40,7 +40,7 @@ func (r *PlayerRepository) FindAll() ([]*entity.Player, error) {
 	for _, player := range players {
 		res = append(res, &entity.Player{
 			ID:            player.ID,
-			Year:          player.TeamID,
+			Year:          player.Year,
 			Name:          player.Name,
 			TeamID:        player.TeamID,
 			PositionID:    player.PositionID,
