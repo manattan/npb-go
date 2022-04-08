@@ -1,0 +1,27 @@
+version: "3"
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./vm/server/Dockerfile
+    tty: true
+    volumes:
+      - ./:/usr/src/app
+    ports:
+      - "1323:1323"
+    depends_on:
+      - db
+    command: "go run main.go"
+  db:
+    image: mysql:latest
+    hostname: manattan
+    volumes:
+      - ./vm/db:/docker-entrypoint-initdb.d
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: hoge
+      MYSQL_DATABASE: npb_v1
+      MYSQL_USER: manattan
+      MYSQL_PASSWORD: hoge
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
